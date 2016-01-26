@@ -1,5 +1,26 @@
 import Data.List
 
+-- Problem 11 (Gotta condense this soon)
+data Something a = Single a | Multiple Int a deriving Show
+
+encodeModified ::(Eq a) => [a] -> [Something a]
+encodeModified = foldr foldingFunction []
+    where foldingFunction x [] = [(Single x)]
+	  foldingFunction x l@((Multiple count character):xs) = if x == character then ((Multiple (count+1) character):xs)
+                                                                else (Single x):l
+          foldingFunction x l@((Single character):xs) = if x == character then ((Multiple 2 character):xs)
+                                                                else (Single x):l
+	 
+-- Problem 12 Decoding the list
+decodeModified :: [Something a] -> [a]
+decodeModified = foldr foldingFunction []
+    where foldingFunction (Single x) acc = x:acc
+          foldingFunction (Multiple number character) acc = (take number $ repeat character) ++ acc 
+
+-- Problem 13 (no clue about the sublist)
+
+
+
 -- Problem 14
 dupli :: [a] -> [a]
 dupli = foldr (\x acc -> x:x:acc) []
