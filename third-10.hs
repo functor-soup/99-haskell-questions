@@ -3,12 +3,8 @@ import Data.List
 
 -- Problem 21 
 insertAt :: Eq a => a -> [a] -> Int -> [a]
-insertAt x someString someNumber  = let zippedList = zip [1..] someString
-                                        foldingFunction (index,a) acc 
-                                                | index == someNumber = (index,x):(index,a):acc
-                                                | otherwise = (index,a):acc
-                                        extractorFunction = foldr (\(_,a) acc -> a:acc) []
-                                    in extractorFunction $ foldr foldingFunction [] zippedList
+insertAt x container index  = let (first,second) = splitAt index container
+                              in first ++ [x] ++ second
 
 -- Problem 22
 range :: Int -> Int -> [Int]
