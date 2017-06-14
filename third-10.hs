@@ -14,8 +14,6 @@ range a b = let recFunction x
             in recFunction a
 
 -- Problem 23
-import System.Random
-
 rnd_select :: [a] -> Int -> IO [a]
 rnd_select [] _ = return []
 rnd_select y x = map (y !!) . take x . randomRs (0, (length y) - 1) <$> newStdGen
