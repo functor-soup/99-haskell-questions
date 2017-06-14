@@ -14,11 +14,11 @@ range a b = let recFunction x
             in recFunction a
 
 -- Problem 23
+import System.Random
+
 rnd_select :: [a] -> Int -> IO [a]
-rnd_select list number = do
-		    gen <- newStdGen
-                    let newList = take number $ randomRs (0,(length list)-1) gen
-                    return [list !! n | n <- newList]
+rnd_select [] _ = return []
+rnd_select y x = map (y !!) . take x . randomRs (0, (length y) - 1) <$> newStdGen
                     
 
 -- Problem 25  I can't believe I got this to work .. sniff I would like to thank applicative functors and my mom 
